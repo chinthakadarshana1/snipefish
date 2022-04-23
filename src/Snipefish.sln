@@ -3,9 +3,50 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.Domain", "Snipefish.Domain\Snipefish.Domain.csproj", "{D5F9E8B3-333C-45AD-B85A-011E7B77A688}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9A1B10AE-52A9-4824-A739-BE570FEFF351}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.Persistence.Mongo", "Sniperfish.Persistence.Mongo\Snipefish.Persistence.Mongo.csproj", "{B791B298-F364-477B-A1F6-E8D297CCF39B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.WebApi", "Sniperfish.WebApi\Snipefish.WebApi.csproj", "{01EACC4D-068A-4AD3-9EE5-16378DF36370}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.WebClient", "Sniperfish.WebClient\Snipefish.WebClient.csproj", "{D87966B5-88ED-463D-BEE4-5DCA6AF05702}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.Application", "Snipefish.Application\Snipefish.Application.csproj", "{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5F9E8B3-333C-45AD-B85A-011E7B77A688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5F9E8B3-333C-45AD-B85A-011E7B77A688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5F9E8B3-333C-45AD-B85A-011E7B77A688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5F9E8B3-333C-45AD-B85A-011E7B77A688}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B791B298-F364-477B-A1F6-E8D297CCF39B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B791B298-F364-477B-A1F6-E8D297CCF39B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B791B298-F364-477B-A1F6-E8D297CCF39B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B791B298-F364-477B-A1F6-E8D297CCF39B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01EACC4D-068A-4AD3-9EE5-16378DF36370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01EACC4D-068A-4AD3-9EE5-16378DF36370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01EACC4D-068A-4AD3-9EE5-16378DF36370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01EACC4D-068A-4AD3-9EE5-16378DF36370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D87966B5-88ED-463D-BEE4-5DCA6AF05702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D87966B5-88ED-463D-BEE4-5DCA6AF05702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D87966B5-88ED-463D-BEE4-5DCA6AF05702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D87966B5-88ED-463D-BEE4-5DCA6AF05702}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B791B298-F364-477B-A1F6-E8D297CCF39B} = {9A1B10AE-52A9-4824-A739-BE570FEFF351}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FCCE685-A44A-4185-B6D3-F322FEBCCDDD}
