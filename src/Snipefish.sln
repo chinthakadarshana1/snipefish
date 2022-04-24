@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.WebClient", "Snip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.Application", "Snipefish.Application\Snipefish.Application.csproj", "{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F09D92C4-C4D8-44CB-83E0-2DF1F5665E4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F09D92C4-C4D8-44CB-83E0-2DF1F5665E4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F09D92C4-C4D8-44CB-83E0-2DF1F5665E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F09D92C4-C4D8-44CB-83E0-2DF1F5665E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F09D92C4-C4D8-44CB-83E0-2DF1F5665E4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
