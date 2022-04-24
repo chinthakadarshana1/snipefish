@@ -31,7 +31,8 @@ services:
   snipefish.webclient:
     #http://localhost:8091/
     container_name: snipefish_webclient
-    image: ${DOCKER_REGISTRY-}snipefishwebclient
+    #image: ${DOCKER_REGISTRY-}snipefishwebclient
+    image: ghcr.io/chinthakadarshana1/snipefish_webclient
     restart: always
     ports:
         - 8091:80
@@ -44,7 +45,8 @@ services:
   snipefish.webapi:
     #http://localhost:8092/swagger/index.html
     container_name: snipefish_webapi
-    image: ${DOCKER_REGISTRY-}snipefishwebapi
+    #image: ${DOCKER_REGISTRY-}snipefishwebapi
+    image: ghcr.io/chinthakadarshana1/snipefish_webapi
     restart: always
     ports:
         - 8092:80
