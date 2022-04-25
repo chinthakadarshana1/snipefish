@@ -7,13 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Sniperfish.WebApi/Snipefish.WebApi.csproj", "Sniperfish.WebApi/"]
+COPY ["Snipefish.WebApi/Snipefish.WebApi.csproj", "Snipefish.WebApi/"]
 COPY ["Snipefish.Domain/Snipefish.Domain.csproj", "Snipefish.Domain/"]
-COPY ["Sniperfish.Persistence.Mongo/Snipefish.Persistence.Mongo.csproj", "Sniperfish.Persistence.Mongo/"]
+COPY ["Snipefish.Persistence.Mongo/Snipefish.Persistence.Mongo.csproj", "Snipefish.Persistence.Mongo/"]
 COPY ["Snipefish.Application/Snipefish.Application.csproj", "Snipefish.Application/"]
-RUN dotnet restore "Sniperfish.WebApi/Snipefish.WebApi.csproj"
+RUN dotnet restore "Snipefish.WebApi/Snipefish.WebApi.csproj"
 COPY . .
-WORKDIR "/src/Sniperfish.WebApi"
+WORKDIR "/src/Snipefish.WebApi"
 RUN dotnet build "Snipefish.WebApi.csproj" -c Release -o /app/build
 
 FROM build AS publish

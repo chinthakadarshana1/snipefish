@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Sniperfish.WebClient/Snipefish.WebClient.csproj", "Sniperfish.WebClient/"]
-RUN dotnet restore "Sniperfish.WebClient/Snipefish.WebClient.csproj"
+COPY ["Snipefish.WebClient/Snipefish.WebClient.csproj", "Snipefish.WebClient/"]
+RUN dotnet restore "Snipefish.WebClient/Snipefish.WebClient.csproj"
 COPY . .
-WORKDIR "/src/Sniperfish.WebClient"
+WORKDIR "/src/Snipefish.WebClient"
 RUN dotnet build "Snipefish.WebClient.csproj" -c Release -o /app/build
 
 FROM build AS publish
