@@ -28,20 +28,6 @@ services:
     depends_on:
         - mongo
 
-  snipefish.webclient:
-    #http://localhost:8091/
-    container_name: snipefish_webclient
-    #image: ${DOCKER_REGISTRY-}snipefishwebclient
-    image: ghcr.io/chinthakadarshana1/snipefish_webclient
-    restart: always
-    ports:
-        - 8091:80
-    build:
-        context: .
-        dockerfile: Snipefish.WebClient/Dockerfile
-    depends_on:
-        - mongo
-
   snipefish.webapi:
     #http://localhost:8092/swagger/index.html
     container_name: snipefish_webapi
@@ -49,16 +35,34 @@ services:
     image: ghcr.io/chinthakadarshana1/snipefish_webapi
     restart: always
     ports:
-        - 8092:80
+        - 8091:443
+        #- 8091:80
     build:
         context: .
         dockerfile: Snipefish.WebApi/Dockerfile
     depends_on:
         - mongo 
     environment:
-        - ASPNETCORE_ENVIRONMENT=Development
+        ASPNETCORE_ENVIRONMENT: Development
         #MongoConnections
-        - MongoConfigurations__SnipefishDbConfiguration__ConnectionString=mongodb://localhost:27017/
-      
+        MongoConfigurations__SnipefishDbConfiguration__ConnectionString: mongodb://root:example@localhost:27017/
+
+  snipefish.webclient:
+    #http://localhost:8091/
+    container_name: snipefish_webclient
+    #image: ${DOCKER_REGISTRY-}snipefishwebclient
+    image: ghcr.io/chinthakadarshana1/snipefish_webclient
+    restart: always
+    ports:
+        - 8092:443
+        #- 8092:80
+    build:
+        context: .
+        dockerfile: Snipefish.WebClient/Dockerfile
+    depends_on:
+        - mongo
+        - snipefish.webapi
+
+
 
 
