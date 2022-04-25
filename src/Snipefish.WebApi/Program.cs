@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigAutofacContainer();
 
-
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables("snipefish_");
@@ -19,6 +18,8 @@ builder.Services.AddApplicationConfigurations(builder.Configuration);
 builder.Services.AddNlogLogging(builder.Configuration);
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+
+builder.Services.AddCorsConfigurations(builder.Configuration);
 
 
 builder.Services.AddControllers();
@@ -36,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(CorsProvider.SnipefishCors);
 
 app.UseAuthorization();
 

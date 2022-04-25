@@ -60,3 +60,5 @@ docker system prune -a
 droplet
 206.189.13.185
 ubuntu-s-1vcpu-1gb-ams3-01
+
+    $.growl.error({ title: "Error occurred", message: "Api Call Error" });

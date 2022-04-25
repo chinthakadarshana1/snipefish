@@ -29,7 +29,7 @@ services:
         - snipefish.mongodb
 
   snipefish.webapi:
-    #http://localhost:8092/swagger/index.html
+    #https://localhost:8091/swagger/index.html
     container_name: snipefish_webapi
     #image: ${DOCKER_REGISTRY-}snipefishwebapi
     image: ghcr.io/chinthakadarshana1/snipefish_webapi
@@ -48,7 +48,7 @@ services:
         snipefish_MongoConfigurations__SnipefishDbConfiguration__ConnectionString: mongodb://root:example@snipefish.mongodb:27017/
 
   snipefish.webclient:
-    #http://localhost:8091/
+    #https://localhost:8092/
     container_name: snipefish_webclient
     #image: ${DOCKER_REGISTRY-}snipefishwebclient
     image: ghcr.io/chinthakadarshana1/snipefish_webclient
@@ -62,6 +62,10 @@ services:
     depends_on:
         - snipefish.mongodb
         - snipefish.webapi
+    environment:
+        ASPNETCORE_ENVIRONMENT: Development
+        #MongoConnections
+        snipefish_SnipefishConfigs__SnipefishApiUrl: https://localhost:8091/api/
 
 
 

@@ -366,6 +366,12 @@ function update(source) {
             d.children.push(newNode);
             update(d);
         }
+
+        //window.Snipfish.cHiNLoader(true);
+        window.Snipfish.CommonFunctions.AjaxPost(Snipfish.Configurations.snipefishApiUrl + "todo", {"Name":"chin" , "Description":"chin 12345"})
+            .then(function (data) {
+                //window.CommonFunctions.cHiNLoader(false);
+            }.bind(this));
     }
 
     // Remove node

@@ -1,7 +1,16 @@
+using Snipefish.WebClient.Configurations;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddEnvironmentVariables("snipefish_");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add services to the container.
+builder.Services.AddApplicationConfigurations(builder.Configuration);
 
 var app = builder.Build();
 

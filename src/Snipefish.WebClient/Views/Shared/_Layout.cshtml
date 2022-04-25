@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Snipefish.WebClient.Configurations
+@inject SnipefishWebConfiguration _snipefishWebConfiguration
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -42,9 +45,15 @@
             &copy; 2022 - Snipefish.WebClient - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        Snipfish.Configurations = JSON.parse('@Html.Raw(Json.Serialize(_snipefishWebConfiguration))');
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
