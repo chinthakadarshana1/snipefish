@@ -24,7 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Snipefish.Application\Snipefish.Application.csproj" />
     <ProjectReference Include="..\Snipefish.Domain\Snipefish.Domain.csproj" />
-    <ProjectReference Include="..\Sniperfish.Persistence.Mongo\Snipefish.Persistence.Mongo.csproj" />
+    <ProjectReference Include="..\Snipefish.Persistence.Mongo\Snipefish.Persistence.Mongo.csproj" />
   </ItemGroup>
 
 </Project>

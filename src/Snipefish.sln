@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.Domain", "Snipefi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9A1B10AE-52A9-4824-A739-BE570FEFF351}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.Persistence.Mongo", "Sniperfish.Persistence.Mongo\Snipefish.Persistence.Mongo.csproj", "{B791B298-F364-477B-A1F6-E8D297CCF39B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.Persistence.Mongo", "Snipefish.Persistence.Mongo\Snipefish.Persistence.Mongo.csproj", "{B791B298-F364-477B-A1F6-E8D297CCF39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.WebApi", "Sniperfish.WebApi\Snipefish.WebApi.csproj", "{01EACC4D-068A-4AD3-9EE5-16378DF36370}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.WebApi", "Snipefish.WebApi\Snipefish.WebApi.csproj", "{01EACC4D-068A-4AD3-9EE5-16378DF36370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.WebClient", "Sniperfish.WebClient\Snipefish.WebClient.csproj", "{D87966B5-88ED-463D-BEE4-5DCA6AF05702}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.WebClient", "Snipefish.WebClient\Snipefish.WebClient.csproj", "{D87966B5-88ED-463D-BEE4-5DCA6AF05702}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snipefish.Application", "Snipefish.Application\Snipefish.Application.csproj", "{E34D5DCA-BC85-49CE-8526-AA0FD3B87600}"
 EndProject

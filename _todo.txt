@@ -1,0 +1,62 @@
+https://observablehq.com/@d3/collapsible-tree
+https://bl.ocks.org/adamfeuer/042bfa0dde0059e2b288
+
+https://bl.ocks.org/d3noob/8375092
+
+https://github.com/d3/d3-hierarchy/blob/main/README.md#tree
+
+
+
+http://localhost:8080/tree_html/
+
+
+https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd
+
+schedule
+
+d._children ? "link-active" : "link";
+
+
+https://mahedee.net/playing-with-clean-architecture-and-cqrs-pattern-using-asp.net-core-ef-and-dapper/
+
+https://medium.com/@kristaps.strals/docker-mongodb-net-core-a-good-time-e21f1acb4b7b
+https://medium.com/aspnetrun/build-catalog-microservice-using-asp-net-core-mongodb-and-docker-container-88b8fd4d5040
+https://geeksarray.com/blog/create-mongodb-docker-image-and-connect-from-dot-net-core-app
+
+
+api dto 
+dto model validations
+
+
+
+
+
+
+https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
+
+
+
+docker login ghcr.io -u chinthakadarshana1 --password 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
+
+docker build -t  ghcr.io/chinthakadarshana1/snipefish_webapi -f Sniperfish.WebApi/Dockerfile .
+docker push ghcr.io/chinthakadarshana1/snipefish_webapi
+
+docker build -t  ghcr.io/chinthakadarshana1/snipefish_webclient -f Sniperfish.WebClient/Dockerfile .
+docker push ghcr.io/chinthakadarshana1/snipefish_webclient
+
+
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+
+
+#pull
+docker-compose pull 
+docker-compose -f docker-compose.yml up -d
+
+#clean
+docker system prune -a
+
+
+
+droplet
+206.189.13.185
+ubuntu-s-1vcpu-1gb-ams3-01

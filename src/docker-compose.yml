@@ -38,7 +38,7 @@ services:
         - 8091:80
     build:
         context: .
-        dockerfile: Sniperfish.WebClient/Dockerfile
+        dockerfile: Snipefish.WebClient/Dockerfile
     depends_on:
         - mongo
 
@@ -52,7 +52,7 @@ services:
         - 8092:80
     build:
         context: .
-        dockerfile: Sniperfish.WebApi/Dockerfile
+        dockerfile: Snipefish.WebApi/Dockerfile
     depends_on:
         - mongo 
     environment:
