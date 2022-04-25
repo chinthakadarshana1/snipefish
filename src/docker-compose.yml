@@ -3,7 +3,7 @@ version: '3.4'
 
 services:
 
-  mongo:
+  snipefish.mongodb:
     #mongodb://localhost:27017/
     container_name: snipefish_db
     image: mongo
@@ -14,7 +14,7 @@ services:
     ports:
         - 27017:27017
 
-  mongo-express:
+  snipefish.mongo-express:
     #http://localhost:8090/
     container_name: snipefish_db_admin
     image: mongo-express
@@ -26,7 +26,7 @@ services:
         ME_CONFIG_MONGODB_ADMINUSERNAME: root
         ME_CONFIG_MONGODB_ADMINPASSWORD: example
     depends_on:
-        - mongo
+        - snipefish.mongodb
 
   snipefish.webapi:
     #http://localhost:8092/swagger/index.html
@@ -41,11 +41,11 @@ services:
         context: .
         dockerfile: Snipefish.WebApi/Dockerfile
     depends_on:
-        - mongo 
+        - snipefish.mongodb 
     environment:
         ASPNETCORE_ENVIRONMENT: Development
         #MongoConnections
-        MongoConfigurations__SnipefishDbConfiguration__ConnectionString: mongodb://root:example@localhost:27017/
+        snipefish_MongoConfigurations__SnipefishDbConfiguration__ConnectionString: mongodb://root:example@snipefish.mongodb:27017/
 
   snipefish.webclient:
     #http://localhost:8091/
@@ -60,7 +60,7 @@ services:
         context: .
         dockerfile: Snipefish.WebClient/Dockerfile
     depends_on:
-        - mongo
+        - snipefish.mongodb
         - snipefish.webapi
 
 

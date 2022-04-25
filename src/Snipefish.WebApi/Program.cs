@@ -11,7 +11,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddEnvironmentVariables();
+    .AddEnvironmentVariables("snipefish_");
 
 // Add services to the container.
 builder.Services.AddApplicationConfigurations(builder.Configuration);

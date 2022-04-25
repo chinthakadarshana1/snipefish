@@ -7,8 +7,8 @@
       "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
       "commandVersion": "1.0",
       "serviceActions": {
-        "mongo": "StartWithoutDebugging",
-        "mongo-express": "StartWithoutDebugging",
+        "snipefish.mongodb": "StartWithoutDebugging",
+        "snipefish.mongo-express": "StartWithoutDebugging",
         "snipefish.webapi": "StartDebugging",
         "snipefish.webclient": "StartDebugging"
       }
