@@ -36,12 +36,12 @@ https://docs.github.com/en/packages/working-with-a-github-packages-registry/work
 
 
 
-docker login ghcr.io -u chinthakadarshana1 --password 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
+docker login ghcr.io -u chinthakadarshana1 --password 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
 
-docker build -t  ghcr.io/chinthakadarshana1/snipefish_webapi -f Sniperfish.WebApi/Dockerfile .
+docker build -t  ghcr.io/chinthakadarshana1/snipefish_webapi -f Snipefish.WebApi/Dockerfile .
 docker push ghcr.io/chinthakadarshana1/snipefish_webapi
 
-docker build -t  ghcr.io/chinthakadarshana1/snipefish_webclient -f Sniperfish.WebClient/Dockerfile .
+docker build -t  ghcr.io/chinthakadarshana1/snipefish_webclient -f Snipefish.WebClient/Dockerfile .
 docker push ghcr.io/chinthakadarshana1/snipefish_webclient
 
 
@@ -58,7 +58,7 @@ docker system prune -a
 
 
 droplet
-206.189.13.185
+ssh root@206.189.13.185
 ubuntu-s-1vcpu-1gb-ams3-01
 
     $.growl.error({ title: "Error occurred", message: "Api Call Error" });

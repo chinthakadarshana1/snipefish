@@ -1,41 +1,4 @@
 ﻿
-$(document).ready(function () {
-
-    var treeData =
-    {
-        "name": "Top Level",
-        "children": [
-            {
-                "name": "Level 2: A",
-                "children": [
-                    { "name": "Son of A" },
-                    {
-                        "name": "Daughter of A"
-                        , "children": [
-                            { "name": "Son of A" },
-                            { "name": "Son of A" },
-                            { "name": "Daughter of A" }
-                        ]
-                    }
-                ]
-            },
-            { "name": "Level 2: B" }
-        ]
-    };
-
-    let treeConfig = {
-        ParentDiv: "svgWrapper",
-        addClick: function (d) { console.log(d) },
-        removeClick: function (d) { console.log(d) },
-        editClick: function (d) { console.log(d) },
-        nodeClick: function (d) { console.log(d) }
-    }
-
-    let tree = treeEditor(treeConfig);
-    tree.LoadTree(treeData);
-
-    $("#btnZoomIn").click(function () { tree.zoomIn() });
-});
 
 
 function treeEditor(configurations) {
@@ -142,9 +105,9 @@ function treeEditor(configurations) {
         // Collapse the node and all it's children
         function collapse(d) {
             if (d.children) {
-                d._children = d.children
-                d._children.forEach(collapse)
-                d.children = null
+                d._children = d.children;
+                d._children.forEach(collapse);
+                d.children = null;
             }
         }
 
@@ -168,9 +131,10 @@ function treeEditor(configurations) {
             // Enter any new modes at the parent's previous position.
             let nodeEnter = node.enter().append('g')
                 .attr('class', 'node')
-                .attr("transform", function (d) {
-                    return "translate(" + source.y0 + "," + source.x0 + ")";
-                })
+                .attr("transform",
+                    function(d) {
+                        return "translate(" + source.y0 + "," + source.x0 + ")";
+                    });
 
             // Add Rect for the nodes
             nodeEnter.append('rect')
@@ -182,17 +146,17 @@ function treeEditor(configurations) {
                 .style("fill", function (d) {
                     return d._children ? "lightsteelblue" : "#d6e2ec";
                 })
-                .on('click', configurations.nodeClick);
+                .on('click', function (d) { nodeClickInternal(d, configurations.nodeClick) });
 
 
             //add new button
-            loadActionBtn(nodeEnter, 0, -40, configurations.addClick, "+");
+            loadActionBtn(nodeEnter, 0, -40, function (d) { addClickInternal(d, configurations.addClick) }, "+");
 
             //remove button
-            loadActionBtn(nodeEnter, 20, -40, configurations.removeClick, "-");
+            loadActionBtn(nodeEnter, 20, -40, function (d) { removeClickInternal(d, configurations.removeClick) }, "-");
 
             //edit button
-            loadActionBtn(nodeEnter, 40, -40, configurations.editClick, "E");
+            loadActionBtn(nodeEnter, 40, -40, function (d) { editClickInternal(d, configurations.editClick) }, "E");
 
 
             // Add labels for the nodes
@@ -207,7 +171,7 @@ function treeEditor(configurations) {
                 })
                 .text(function (d) { return d.data.name; })
                 .attr('cursor', 'pointer')
-                .on('click', configurations.nodeClick);
+                .on('click', function (d) { nodeClickInternal(d, configurations.nodeClick) });
 
             // UPDATE
             var nodeUpdate = nodeEnter.merge(node);
@@ -247,8 +211,8 @@ function treeEditor(configurations) {
             var linkEnter = link.enter().insert('path', "g")
                 .attr("class", function (d) { return d._children ? "link active" : "link"; })
                 .attr('d', function (d) {
-                    var o = { x: source.x0, y: source.y0 }
-                    return diagonal(o, o)
+                    var o = { x: source.x0, y: source.y0 };
+                    return diagonal(o, o);
                 });
 
             // UPDATE
@@ -263,8 +227,8 @@ function treeEditor(configurations) {
             var linkExit = link.exit().transition()
                 .duration(duration)
                 .attr('d', function (d) {
-                    var o = { x: source.x, y: source.y }
-                    return diagonal(o, o)
+                    var o = { x: source.x, y: source.y };
+                    return diagonal(o, o);
                 })
                 .remove();
 
@@ -279,10 +243,93 @@ function treeEditor(configurations) {
                 let path = `M ${s.y} ${s.x}
                         C ${(s.y + d.y) / 2} ${s.x},
                         ${(s.y + d.y) / 2} ${d.x},
-                        ${d.y} ${d.x}`
-                return path
+                        ${d.y} ${d.x}`;
+                return path;
             }
         }
+
+
+        // Toggle children on nodeClick.
+        function nodeClickInternal(d, callBack) {
+            if (callBack(d)) {
+                if (d.children) {
+                    d._children = d.children;
+                    d.children = null;
+                } else {
+                    d.children = d._children;
+                    d._children = null;
+                }
+
+                update(d);
+            }
+        }
+
+        // Add new Node
+        function addClickInternal(d, callBack) {
+            if (callBack(d)) {
+                let newChild = { "name": "chin" };
+
+                if (!d.data.children) {
+                    d.data.children = [];
+                }
+                d.data.children.push(newChild);
+
+                var newNode = d3.hierarchy(newChild);
+                newNode.depth = d.depth + 1;
+                newNode.height = d.height - 1;
+                newNode.parent = d;
+
+                if (!d.children) {
+                    if (!d._children) {
+                        d._children = [];
+                    }
+                    d._children.push(newNode);
+                    update(d);
+                    nodeClickInternal(d, function () { return true; });
+                } else {
+                    if (!d.children) {
+                        d.children = [];
+                    }
+                    d.children.push(newNode);
+                    update(d);
+                }
+            }
+        }
+
+        // Remove node
+        function removeClickInternal(d, callBack) {
+            if (callBack(d)) {
+                var index = d.parent.data.children.length;
+                while (index--) {
+                    if (d.parent.data.children[index].name === d.data.name) {
+                        if (d.parent._children) {
+                            d.parent._children.splice(index, 1);
+                        }
+
+                        if (d.parent.children) {
+                            d.parent.children.splice(index, 1);
+                        }
+
+                        d.parent.data.children.splice(index, 1);
+                        break;
+                    }
+                }
+
+                if (d.parent.data.children.length == 0) {
+                    nodeClickInternal(d.parent, function () { return true; });
+                } else {
+                    update(d.parent);
+                }
+            }
+        }
+
+        //edit node
+        function editClickInternal(d, callBack) {
+            if (callBack(d)) {
+                //todo
+            }
+        }
+
 
         function loadActionBtn(node, x, y, onClick, text) {
             node.append('rect')
@@ -318,12 +365,11 @@ function treeEditor(configurations) {
 
             // Collapse after the second level //todo
             root.children.forEach(collapse);
-            update(root)
+            update(root);
         }
-
 
     }
 
-
     return PublicProps;
 }
+
