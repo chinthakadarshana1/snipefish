@@ -18,12 +18,15 @@ namespace Snipefish.WebClient.Controllers
             _snipefishWebApi = snipefishWebApi;
         }
 
-        public async Task<IActionResult> Index(UserViewModel user)
+        public async Task<IActionResult> Index(UserViewModel? user = null)
         {
-            LoginUserCommand loginUserCommand = new LoginUserCommand { UserEmail = user.UserName ?? throw new InvalidOperationException("Invalid User Name") };
-            var loggedInUser = await _snipefishWebApi.UserLogin(loginUserCommand, default);
-            HttpContext.Session.Set<UserAdventuresResponse>(SnipefishWebConfiguration.UserSessionKey, loggedInUser!);
-
+            if (user != null)
+            {
+                LoginUserCommand loginUserCommand = new LoginUserCommand { UserEmail = user.UserName ?? throw new InvalidOperationException("Invalid User Name") };
+                var loggedInUser = await _snipefishWebApi.UserLogin(loginUserCommand, default);
+                HttpContext.Session.Set<UserAdventuresResponse>(SnipefishWebConfiguration.UserSessionKey, loggedInUser!);
+            }
+            
             return View();
         }
     }

@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Snipefish.WebClient.Models;
 using System.Diagnostics;
-using Snipefish.Application.Commands.UserAdventures;
-using Snipefish.Application.Responses;
 using Snipefish.WebClient.Configurations;
-using Snipefish.WebClient.Helpers;
 
 namespace Snipefish.WebClient.Controllers
 {
@@ -28,6 +25,12 @@ namespace Snipefish.WebClient.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove(SnipefishWebConfiguration.UserSessionKey);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

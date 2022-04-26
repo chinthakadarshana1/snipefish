@@ -1,10 +1,12 @@
 ﻿@using Snipefish.WebClient.Configurations
 @using Microsoft.AspNetCore.Http;
+@using Snipefish.Application.Responses
+@using Snipefish.WebClient.Helpers;
 
 @inject SnipefishWebConfiguration _snipefishWebConfiguration
 
 @{
-    var loggedInUser = Context.Session.Get(SnipefishWebConfiguration.UserSessionKey);
+    var loggedInUser = Context.Session.Get<UserAdventuresResponse>(SnipefishWebConfiguration.UserSessionKey);
     var controllerName = ViewContext.RouteData.Values["controller"]?.ToString();
     if (!string.IsNullOrEmpty(controllerName)  && controllerName.Trim().ToLower() != "home")
     {
@@ -36,21 +38,22 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        
-                        @{
-                            if (loggedInUser != null)
-                            {
+                    
+                    @{
+                        if (loggedInUser != null)
+                        {
+                            <ul class="navbar-nav flex-grow-1">
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Adventure" asp-action="Index">Create Adventure</a>
                                 </li>
-                            }
+                            </ul>
+                            <form class="d-flex">
+                                <a class="nav-link active" aria-current="page" href="#">Hi @loggedInUser.UserName</a>
+                                <a class="btn btn-outline-success" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </form>
                         }
+                    }
 
-                    </ul>
                 </div>
             </div>
         </nav>
