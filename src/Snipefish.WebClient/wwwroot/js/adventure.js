@@ -1,6 +1,10 @@
 ﻿
 $(document).ready(function () {
+    loadTree();
+});
 
+
+function loadTree() {
     var treeData =
     {
         "name": "Top Level",
@@ -36,35 +40,42 @@ $(document).ready(function () {
     tree.LoadTree(treeData);
 
     $("#btnZoomIn").click(function () { tree.zoomIn() });
-
-    function nodeClicked(d) {
-        console.log(d);
-        return true;
-    }
-
-    function addClicked(d) {
-        console.log(d);
-
-        //window.Snipfish.cHiNLoader(true);
-        /*
-        window.Snipfish.CommonFunctions.AjaxPost(Snipfish.Configurations.snipefishApiUrl + "todo", { "Name": "chin", "Description": "chin 12345" })
-            .then(function (data) {
-                //window.CommonFunctions.cHiNLoader(false);
-            }.bind(this));
-        */
-
-        return true;
-    }
-
-    function removeClicked(d) {
-        console.log(d);
-        return true;
-    }
-
-    function editClicked(d) {
-        console.log(d);
-        return true;
-    }
-});
+    $("#btnZoomOut").click(function () { tree.zoomOut() });
+    $("#btnResetZoom").click(function () { tree.resetZoom() });
+    $("#btnPanLeft").click(function () { tree.panLeft() });
+    $("#btnPanRight").click(function () { tree.panRight() });
+    $("#btnCenter").click(function () { tree.center() });
+}
 
 
+function nodeClicked(d, callBack) {
+    console.log(d);
+    callBack(d);
+}
+
+function addClicked(d, callBack) {
+    console.log(d);
+
+    $('#modalAddNode').modal('show');
+    $('#btnAddStep').off("click");
+    $('#btnAddStep').click(function () { callBack(d) });
+
+    //window.Snipfish.cHiNLoader(true);
+    /*
+    window.Snipfish.CommonFunctions.AjaxPost(Snipfish.Configurations.snipefishApiUrl + "todo", { "Name": "chin", "Description": "chin 12345" })
+        .then(function (data) {
+            //window.CommonFunctions.cHiNLoader(false);
+        }.bind(this));
+    */
+    //callBack(d);
+}
+
+function removeClicked(d, callBack) {
+    console.log(d);
+    callBack(d);
+}
+
+function editClicked(d, callBack) {
+    console.log(d);
+    callBack(d);
+}

@@ -71,7 +71,7 @@ function treeEditor(configurations) {
         PublicProps.center = function () {
             d3.select(parentDivId).select('svg')
                 .transition()
-                .call(zoom.translateTo, 0.5 * width, 0.5 * height);
+                .call(zoom.translateTo, 0.5 * svgWidth, 0.5 * svgHeight);
         }
 
         PublicProps.panLeft = function () {
@@ -113,10 +113,10 @@ function treeEditor(configurations) {
 
         function update(source) {
             // Assigns the x and y position for the nodes
-            var treeData = treemap(root);
+            let treeData = treemap(root);
 
             // Compute the new tree layout.
-            var nodes = treeData.descendants(),
+            let nodes = treeData.descendants(),
                 links = treeData.descendants().slice(1);
 
             // Normalize for fixed-depth.
@@ -125,14 +125,14 @@ function treeEditor(configurations) {
             // ****************** Nodes section ***************************
 
             // Update the nodes...
-            var node = svg.selectAll('g.node')
+            let node = svg.selectAll('g.node')
                 .data(nodes, function (d) { return d.id || (d.id = ++i); });
 
             // Enter any new modes at the parent's previous position.
             let nodeEnter = node.enter().append('g')
                 .attr('class', 'node')
                 .attr("transform",
-                    function(d) {
+                    function (d) {
                         return "translate(" + source.y0 + "," + source.x0 + ")";
                     });
 
@@ -146,17 +146,17 @@ function treeEditor(configurations) {
                 .style("fill", function (d) {
                     return d._children ? "lightsteelblue" : "#d6e2ec";
                 })
-                .on('click', function (d) { nodeClickInternal(d, configurations.nodeClick) });
+                .on('click', function (d) { configurations.nodeClick(d, nodeClickInternal); });
 
 
             //add new button
-            loadActionBtn(nodeEnter, 0, -40, function (d) { addClickInternal(d, configurations.addClick) }, "+");
+            loadActionBtn(nodeEnter, 0, -40, function (d) { configurations.addClick(d, addClickInternal); }, "+");
 
             //remove button
-            loadActionBtn(nodeEnter, 20, -40, function (d) { removeClickInternal(d, configurations.removeClick) }, "-");
+            loadActionBtn(nodeEnter, 20, -40, function (d) { configurations.removeClick(d, removeClickInternal) }, "-");
 
             //edit button
-            loadActionBtn(nodeEnter, 40, -40, function (d) { editClickInternal(d, configurations.editClick) }, "E");
+            loadActionBtn(nodeEnter, 40, -40, function (d) { configurations.editClick(d, editClickInternal) }, "E");
 
 
             // Add labels for the nodes
@@ -171,7 +171,7 @@ function treeEditor(configurations) {
                 })
                 .text(function (d) { return d.data.name; })
                 .attr('cursor', 'pointer')
-                .on('click', function (d) { nodeClickInternal(d, configurations.nodeClick) });
+                .on('click', function (d) { configurations.nodeClick(d, nodeClickInternal); });
 
             // UPDATE
             var nodeUpdate = nodeEnter.merge(node);
@@ -250,84 +250,76 @@ function treeEditor(configurations) {
 
 
         // Toggle children on nodeClick.
-        function nodeClickInternal(d, callBack) {
-            if (callBack(d)) {
-                if (d.children) {
-                    d._children = d.children;
-                    d.children = null;
-                } else {
-                    d.children = d._children;
-                    d._children = null;
-                }
+        function nodeClickInternal(d) {
+            if (d.children) {
+                d._children = d.children;
+                d.children = null;
+            } else {
+                d.children = d._children;
+                d._children = null;
+            }
 
+            update(d);
+        }
+
+        // Add new Node
+        function addClickInternal(d) {
+            let newChild = { "name": "chin" };
+
+            if (!d.data.children) {
+                d.data.children = [];
+            }
+            d.data.children.push(newChild);
+
+            var newNode = d3.hierarchy(newChild);
+            newNode.depth = d.depth + 1;
+            newNode.height = d.height - 1;
+            newNode.parent = d;
+
+            if (!d.children) {
+                if (!d._children) {
+                    d._children = [];
+                }
+                d._children.push(newNode);
+                update(d);
+                nodeClickInternal(d);
+            } else {
+                if (!d.children) {
+                    d.children = [];
+                }
+                d.children.push(newNode);
                 update(d);
             }
         }
 
-        // Add new Node
-        function addClickInternal(d, callBack) {
-            if (callBack(d)) {
-                let newChild = { "name": "chin" };
-
-                if (!d.data.children) {
-                    d.data.children = [];
-                }
-                d.data.children.push(newChild);
-
-                var newNode = d3.hierarchy(newChild);
-                newNode.depth = d.depth + 1;
-                newNode.height = d.height - 1;
-                newNode.parent = d;
-
-                if (!d.children) {
-                    if (!d._children) {
-                        d._children = [];
+        // Remove node
+        function removeClickInternal(d) {
+            let index = d.parent.data.children.length;
+            while (index--) {
+                if (d.parent.data.children[index].name === d.data.name) {
+                    if (d.parent._children) {
+                        d.parent._children.splice(index, 1);
                     }
-                    d._children.push(newNode);
-                    update(d);
-                    nodeClickInternal(d, function () { return true; });
-                } else {
-                    if (!d.children) {
-                        d.children = [];
+
+                    if (d.parent.children) {
+                        d.parent.children.splice(index, 1);
                     }
-                    d.children.push(newNode);
-                    update(d);
+
+                    d.parent.data.children.splice(index, 1);
+                    break;
                 }
             }
-        }
 
-        // Remove node
-        function removeClickInternal(d, callBack) {
-            if (callBack(d)) {
-                var index = d.parent.data.children.length;
-                while (index--) {
-                    if (d.parent.data.children[index].name === d.data.name) {
-                        if (d.parent._children) {
-                            d.parent._children.splice(index, 1);
-                        }
-
-                        if (d.parent.children) {
-                            d.parent.children.splice(index, 1);
-                        }
-
-                        d.parent.data.children.splice(index, 1);
-                        break;
-                    }
-                }
-
-                if (d.parent.data.children.length == 0) {
-                    nodeClickInternal(d.parent, function () { return true; });
-                } else {
-                    update(d.parent);
-                }
+            if (d.parent.data.children.length == 0) {
+                nodeClickInternal(d.parent);
+            } else {
+                update(d.parent);
             }
         }
 
         //edit node
-        function editClickInternal(d, callBack) {
-            if (callBack(d)) {
-                //todo
-            }
+        function editClickInternal(d) {
+            //todo
         }
 
 

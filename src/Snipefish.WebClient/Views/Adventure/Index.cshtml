@@ -10,7 +10,7 @@
 
 
 <div class="container-fluid">
-    <div class="row">
+        <div class="row">
         <div class="row page-header">
             <div class="col" style="margin-bottom: 20px;">
                 <h1 class="display-6">Create New Adventure</h1>
@@ -21,18 +21,41 @@
     <div class="row">
         <div class="editor-container">
             <div class="svg-wrapper" id="svgWrapper">
-                <svg class="svg-editor" width="800" height="600">
-                    <g></g>
+                <svg class="svg-editor" width="1250" height="580">
+                    <g></g>    
                 </svg>
             </div>
             <div class="svg-controls">
                 <button id="btnZoomIn">Zoom in</button>
-                <button onclick="zoomOut()">Zoom out</button>
-                <button onclick="resetZoom()">Reset zoom</button>
-                <button onclick="panLeft()">Pan left</button>
-                <button onclick="panRight()">Pan right</button>
-                <button onclick="center()">Center</button>
+                <button id="btnZoomOut">Zoom out</button>
+                <button id="btnResetZoom">Reset zoom</button>
+                <button id="btnPanLeft">Pan left</button>
+                <button id="btnPanRight">Pan right</button>
+                <button id="btnCenter">Center</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAddNode" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+    aria-labelledby="modalAddNodeLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="modalAddNodeLabel">Add Step</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="txtStepName" class="form-label">Step Name</label>
+                    <input type="text" class="form-control" id="txtStepName" placeholder="Step Name">
+                  </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="btnAddStep" class="btn btn-primary">Add</button>
+            </div>
+        </div>
         </div>
     </div>
 </div>
