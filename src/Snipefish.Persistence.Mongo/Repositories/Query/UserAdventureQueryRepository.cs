@@ -13,7 +13,7 @@ namespace Snipefish.Persistence.Mongo.Repositories.Query
 
         public async Task<UserAdventures?> GetUserByEmail(string requestUserEmail, CancellationToken cancellationToken)
         {
-            return await MongoCollection.Find(c => c.UserEmail.ToLower() == requestUserEmail.ToLower() )
+            return await MongoCollection.Find(c => c.UserName.ToLower() == requestUserEmail.ToLower() )
                 .FirstOrDefaultAsync(cancellationToken);
         }
     }

@@ -1,5 +1,20 @@
 ﻿@using Snipefish.WebClient.Configurations
+@using Microsoft.AspNetCore.Http;
+
 @inject SnipefishWebConfiguration _snipefishWebConfiguration
+
+@{
+    var loggedInUser = Context.Session.Get(SnipefishWebConfiguration.UserSessionKey);
+    var controllerName = ViewContext.RouteData.Values["controller"]?.ToString();
+    if (!string.IsNullOrEmpty(controllerName)  && controllerName.Trim().ToLower() != "home")
+    {
+        if (loggedInUser == null)
+        {
+            Context.Response.Redirect("");
+        }
+    }
+
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +24,6 @@
     <title>@ViewData["Title"] - Snipefish.WebClient</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Snipefish.WebClient.styles.css" asp-append-version="true" />
     @await RenderSectionAsync("Head", required: false)
 </head>
 <body>
@@ -26,15 +40,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CreateAdventure">Create Adventure</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="DoAdventure">Adventure</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Adventure">My Adventures</a>
-                        </li>
+                        
+                        @{
+                            if (loggedInUser != null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Adventure" asp-action="Index">Create Adventure</a>
+                                </li>
+                            }
+                        }
+
                     </ul>
                 </div>
             </div>

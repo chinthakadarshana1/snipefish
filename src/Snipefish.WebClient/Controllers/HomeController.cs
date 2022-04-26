@@ -24,25 +24,6 @@ namespace Snipefish.WebClient.Controllers
             return View();
         }
 
-        public async Task<IActionResult> CreateAdventure(UserViewModel user)
-        {
-            LoginUserCommand loginUserCommand = new LoginUserCommand { UserEmail = user.UserEmail ?? throw new InvalidOperationException("Invalid User Email") };
-            var loggedInUser = await _snipefishWebApi.UserLogin(loginUserCommand, default);
-            HttpContext.Session.Set<UserAdventuresResponse>(SnipefishWebConfiguration.UserSessionKey, loggedInUser!);
-
-            return View();
-        }
-
-        public IActionResult DoAdventure()
-        {
-            return View();
-        }
-
-        public IActionResult Adventure()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

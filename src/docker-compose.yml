@@ -65,5 +65,5 @@ services:
     environment:
         ASPNETCORE_ENVIRONMENT: Development
         #MongoConnections
-        snipefish_SnipefishConfigs__SnipefishApiUrl: https://localhost:8091/api/
+        snipefish_SnipefishConfigs__SnipefishApiUrl: http://localhost:8091/api/
         snipefish_SnipefishConfigs__SnipefishApiInternalUrl: http://snipefish.webapi/api/

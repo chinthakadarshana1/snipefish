@@ -25,7 +25,7 @@ namespace Snipefish.Application.CommandHandlers.UserAdventures
             if (existingUser == null)
             {
                 existingUser = new Domain.Entities.UserAdventures();
-                existingUser.UserEmail = request.UserEmail;
+                existingUser.UserName = request.UserEmail;
                 existingUser.UserId = Guid.NewGuid().ToString();
                 await _userAdventuresCommandRepository.AddAsync(existingUser, cancellationToken);
             }

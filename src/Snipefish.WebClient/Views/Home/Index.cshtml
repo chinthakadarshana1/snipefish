@@ -5,12 +5,12 @@
 }
 
 <div id="userLoginContainer">
-    <h1 class="display-4">Enter your Email to Begin</h1>
+    <h5 class="display-4">Enter your Email to Begin</h5>
 
-    <form asp-action="CreateAdventure" method="post">
+    <form asp-action="Index" asp-controller="Adventure" method="post">
         <div  class="form-control">
-            <label asp-for="UserEmail" class="" >Your name:</label>
-            <input asp-for="UserEmail" />
+            <label asp-for="UserName" class="" >Your name:</label>
+            <input asp-for="UserName" />
         </div>
         <div>
             <p></p>
