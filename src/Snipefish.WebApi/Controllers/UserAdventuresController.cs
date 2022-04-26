@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Snipefish.Application.Commands.UserAdventures;
 using Snipefish.Application.Queries.UserAdventures;
+using Snipefish.Application.Responses;
 using Snipefish.Domain.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -46,6 +47,14 @@ namespace Snipefish.WebApi.Controllers
         public async Task Delete(string id)
         {
             await _mediator.Send(new DeleteUserAdventuresCommand() { UserId = id });
+        }
+
+        // POST api/<UserAdventuresController>/UserLogin
+        [HttpPost]
+        [Route("UserLogin")]
+        public async Task<UserAdventuresResponse> UserLogin([FromBody] LoginUserCommand value)
+        {
+            return await _mediator.Send(value);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Snipefish.Domain.Entities;
+﻿using MongoDB.Driver;
+using Snipefish.Domain.Entities;
 using Snipefish.Domain.Repositories.Query;
 using Snipefish.Persistence.Mongo.DbContext;
 
@@ -8,6 +9,12 @@ namespace Snipefish.Persistence.Mongo.Repositories.Query
     {
         public UserAdventureQueryRepository(ISnipefishDbContext dbContext) : base(dbContext, dbContext.UserAdventuresCollection)
         {
+        }
+
+        public async Task<UserAdventures?> GetUserByEmail(string requestUserEmail, CancellationToken cancellationToken)
+        {
+            return await MongoCollection.Find(c => c.UserEmail.ToLower() == requestUserEmail.ToLower() )
+                .FirstOrDefaultAsync(cancellationToken);
         }
     }
 }

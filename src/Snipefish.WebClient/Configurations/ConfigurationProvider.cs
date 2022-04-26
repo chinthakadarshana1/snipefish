@@ -4,9 +4,13 @@
     {
         public static void AddApplicationConfigurations(this IServiceCollection services, IConfiguration configs)
         {
-            services.AddSingleton(typeof(SnipefishWebConfiguration),
-                configs.GetSection("SnipefishConfigs").Get<SnipefishWebConfiguration>());
+            var snipefishWebConfiguration = configs.GetSection("SnipefishConfigs").Get<SnipefishWebConfiguration>();
 
+            services.AddSingleton(typeof(SnipefishWebConfiguration),
+                snipefishWebConfiguration);
+
+            services.AddSingleton(typeof(SnipefishWebApi),
+                new SnipefishWebApi(snipefishWebConfiguration));
         }
     }
 }
