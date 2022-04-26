@@ -13,8 +13,6 @@
     <div class="row">
         <div class="row page-header">
             <div class="col" style="margin-bottom: 20px;">
-
-        
                 <h1 class="display-6">Create New Adventure</h1>
             </div>
         
@@ -22,13 +20,13 @@
     </div>
     <div class="row">
         <div class="editor-container">
-            <div class="svg-wrapper">
-                <svg id="svgEditor" width="800" height="600">
+            <div class="svg-wrapper" id="svgWrapper">
+                <svg class="svg-editor" width="800" height="600">
                     <g></g>
                 </svg>
             </div>
             <div class="svg-controls">
-                <button onclick="zoomIn()">Zoom in</button>
+                <button id="btnZoomIn">Zoom in</button>
                 <button onclick="zoomOut()">Zoom out</button>
                 <button onclick="resetZoom()">Reset zoom</button>
                 <button onclick="panLeft()">Pan left</button>
