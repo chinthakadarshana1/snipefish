@@ -20,9 +20,9 @@ namespace Snipefish.WebClient.Controllers
 
         public async Task<IActionResult> Index(UserViewModel? user = null)
         {
-            if (user != null)
+            if (!string.IsNullOrEmpty(user?.UserName))
             {
-                LoginUserCommand loginUserCommand = new LoginUserCommand { UserEmail = user.UserName ?? throw new InvalidOperationException("Invalid User Name") };
+                LoginUserCommand loginUserCommand = new LoginUserCommand { UserName = user.UserName ?? throw new InvalidOperationException("Invalid User Name") };
                 var loggedInUser = await _snipefishWebApi.UserLogin(loginUserCommand, default);
                 HttpContext.Session.Set<UserAdventuresResponse>(SnipefishWebConfiguration.UserSessionKey, loggedInUser!);
             }

@@ -9,18 +9,36 @@
 }
 
 
-<div>
-    <svg width="600" height="400">
-        <g></g>
-    </svg>
+<div class="container-fluid">
+    <div class="row">
+        <div class="row page-header">
+            <div class="col" style="margin-bottom: 20px;">
+
+        
+                <h1 class="display-6">Create New Adventure</h1>
+            </div>
+        
+        </div>
+    </div>
+    <div class="row">
+        <div class="editor-container">
+            <div class="svg-wrapper">
+                <svg id="svgEditor" width="800" height="600">
+                    <g></g>
+                </svg>
+            </div>
+            <div class="svg-controls">
+                <button onclick="zoomIn()">Zoom in</button>
+                <button onclick="zoomOut()">Zoom out</button>
+                <button onclick="resetZoom()">Reset zoom</button>
+                <button onclick="panLeft()">Pan left</button>
+                <button onclick="panRight()">Pan right</button>
+                <button onclick="center()">Center</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<button onclick="zoomIn()">Zoom in</button>
-<button onclick="zoomOut()">Zoom out</button>
-<button onclick="resetZoom()">Reset zoom</button>
-<button onclick="panLeft()">Pan left</button>
-<button onclick="panRight()">Pan right</button>
-<button onclick="center()">Center</button>
 
 @section Scripts{
     <!-- load the d3.js library -->	
