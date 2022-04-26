@@ -17,10 +17,10 @@ namespace Snipefish.WebClient
 
         private RestClient GetRestClient(string apiMethod)
         {
-            var options = new RestClientOptions($"{_snipefishWebConfiguration.SnipefishApiUrl}{apiMethod}" )
+            var options = new RestClientOptions($"{_snipefishWebConfiguration.SnipefishApiInternalUrl}{apiMethod}" )
             {
                 ThrowOnAnyError = true,
-                Timeout = 1000
+                Timeout = 30000
             };
             return new RestClient(options);
         }

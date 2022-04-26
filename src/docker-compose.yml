@@ -35,8 +35,8 @@ services:
     image: ghcr.io/chinthakadarshana1/snipefish_webapi
     restart: always
     ports:
-        - 8091:443
-        #- 8091:80
+        #- 8091:443
+        - 8091:80
     build:
         context: .
         dockerfile: Snipefish.WebApi/Dockerfile
@@ -54,8 +54,8 @@ services:
     image: ghcr.io/chinthakadarshana1/snipefish_webclient
     restart: always
     ports:
-        - 8092:443
-        #- 8092:80
+        #- 8092:443
+        - 8092:80
     build:
         context: .
         dockerfile: Snipefish.WebClient/Dockerfile
@@ -66,3 +66,4 @@ services:
         ASPNETCORE_ENVIRONMENT: Development
         #MongoConnections
         snipefish_SnipefishConfigs__SnipefishApiUrl: https://localhost:8091/api/
+        snipefish_SnipefishConfigs__SnipefishApiInternalUrl: http://snipefish.webapi/api/
