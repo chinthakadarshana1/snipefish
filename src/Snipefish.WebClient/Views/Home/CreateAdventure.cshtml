@@ -1,0 +1,29 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "Create Adventure";
+}
+
+@section Head{
+    <link rel="stylesheet" href="~/css/createAdventure.css" asp-append-version="true" />
+}
+
+
+<div>
+    <svg width="600" height="400">
+        <g></g>
+    </svg>
+</div>
+
+<button onclick="zoomIn()">Zoom in</button>
+<button onclick="zoomOut()">Zoom out</button>
+<button onclick="resetZoom()">Reset zoom</button>
+<button onclick="panLeft()">Pan left</button>
+<button onclick="panRight()">Pan right</button>
+<button onclick="center()">Center</button>
+
+@section Scripts{
+    <!-- load the d3.js library -->	
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script  src="~/js/createAdventure.js" asp-append-version="true"></script>
+}

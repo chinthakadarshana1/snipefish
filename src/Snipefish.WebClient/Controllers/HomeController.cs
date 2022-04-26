@@ -18,7 +18,17 @@ namespace Snipefish.WebClient.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult CreateAdventure(UserViewModel user)
+        {
+            return View();
+        }
+
+        public IActionResult DoAdventure()
+        {
+            return View();
+        }
+
+        public IActionResult Adventure()
         {
             return View();
         }

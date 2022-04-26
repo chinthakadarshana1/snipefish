@@ -24,6 +24,7 @@ namespace Snipefish.Persistence.Mongo.DbContext
             }
         }
 
-        public string TodoCollection => _snipefishDbConfiguration.TodoCollection;
+        public string TodoCollection => _snipefishDbConfiguration.TodoCollection; 
+        public string UserAdventuresCollection => _snipefishDbConfiguration.UserAdventuresCollection;
     }
 }

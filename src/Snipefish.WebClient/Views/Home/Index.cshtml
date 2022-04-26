@@ -1,26 +1,22 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-@section Head{
-    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
-}
+<div id="userLoginContainer">
+    <h1 class="display-4">Enter your Email to Begin</h1>
 
-<div>
-    <svg width="600" height="400">
-        <g></g>
-    </svg>
+    <form asp-action="CreateAdventure" method="post">
+        <div  class="form-control">
+            <label asp-for="UserEmail" class="" >Your name:</label>
+            <input asp-for="UserEmail" />
+        </div>
+        <div>
+            <p></p>
+            <button type="submit">Continue</button>
+            <p></p>
+        </div>
+    </form>
 </div>
 
-<button onclick="zoomIn()">Zoom in</button>
-<button onclick="zoomOut()">Zoom out</button>
-<button onclick="resetZoom()">Reset zoom</button>
-<button onclick="panLeft()">Pan left</button>
-<button onclick="panRight()">Pan right</button>
-<button onclick="center()">Center</button>
-
-@section Scripts{
-    <!-- load the d3.js library -->	
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script  src="~/js/home.js" asp-append-version="true"></script>
-}
