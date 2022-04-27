@@ -30,10 +30,20 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Adventure\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Adventure\MyAdventures.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Adventure\StartAdventure.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Pages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Adventure\MyAdventures.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Adventure\StartAdventure.cshtml" />
   </ItemGroup>
 
 </Project>

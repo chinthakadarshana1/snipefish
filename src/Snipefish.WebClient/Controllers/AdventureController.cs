@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Snipefish.Application.Commands.UserAdventures;
 using Snipefish.Application.Responses;
+using Snipefish.Domain.Entities;
 using Snipefish.WebClient.Configurations;
 using Snipefish.WebClient.Helpers;
 using Snipefish.WebClient.Models;
@@ -28,6 +29,48 @@ namespace Snipefish.WebClient.Controllers
             }
             
             return View();
+        }
+
+        public async Task<IActionResult> MyAdventures()
+        {
+            var loggedInUser = HttpContext.Session.Get<UserAdventuresResponse>(SnipefishWebConfiguration.UserSessionKey);
+
+            if (loggedInUser != null)
+            {
+                var userAdventures = await _snipefishWebApi.GetAdventuresByUserId(loggedInUser.UserId, default);
+                return View(userAdventures);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public async Task<IActionResult> StartAdventure(Adventure adventure)
+        {
+            var loggedInUser = HttpContext.Session.Get<UserAdventuresResponse>(SnipefishWebConfiguration.UserSessionKey);
+
+            if (loggedInUser != null)
+            {
+                var userAdventures = await _snipefishWebApi.GetAdventuresByUserId(loggedInUser.UserId, default);
+
+                if (userAdventures?.Adventures != null)
+                {
+                    var selectedAdventure =
+                        userAdventures.Adventures.FirstOrDefault(x => x.Name.ToLower() == adventure.Name.ToLower());
+
+                    if (selectedAdventure != null)
+                    {
+                        return View(selectedAdventure);
+                    }
+                    return RedirectToAction("MyAdventures", "Adventure");
+                }
+                return RedirectToAction("MyAdventures", "Adventure");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

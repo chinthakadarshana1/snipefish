@@ -1,4 +1,6 @@
-﻿namespace Snipefish.Domain.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace Snipefish.Domain.Entities
 {
     public class Step : EntityBase
     {

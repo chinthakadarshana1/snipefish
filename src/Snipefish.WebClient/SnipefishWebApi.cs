@@ -2,6 +2,7 @@
 using RestSharp;
 using Snipefish.Application.Commands.UserAdventures;
 using Snipefish.Application.Responses;
+using Snipefish.Domain.Entities;
 using Snipefish.WebClient.Configurations;
 
 namespace Snipefish.WebClient
@@ -30,6 +31,12 @@ namespace Snipefish.WebClient
             var request = new RestRequest()
                 .AddJsonBody(loginRequest);
             return await GetRestClient("UserAdventures/UserLogin").PostAsync<UserAdventuresResponse>(request, cancellationToken);
+        }
+
+        public async Task<UserAdventures?> GetAdventuresByUserId(string userId, CancellationToken cancellationToken)
+        {
+            var request = new RestRequest($"UserAdventures/{userId}", Method.Get);
+            return await GetRestClient("").GetAsync<UserAdventures>(request, cancellationToken);
         }
     }
 }

@@ -16,9 +16,7 @@ namespace Snipefish.Application.QueryHandlers.UserAdventures
 
         public async Task<Domain.Entities.UserAdventures?> Handle(GetUserAdventuresByIdQuery request, CancellationToken cancellationToken)
         {
-            var userAdventure = MappingBootstraper.Mapper.Map<Domain.Entities.UserAdventures>(request);
-
-            return await _userAdventureQueryRepository.GetById(userAdventure.UserId, cancellationToken);
+            return await _userAdventureQueryRepository.GetUserByUserId(request.UserId, cancellationToken);
         }
     }
 }

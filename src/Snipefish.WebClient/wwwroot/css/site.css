@@ -17,8 +17,11 @@ body {
   margin-bottom: 60px;
 }
 
-/*loader styles*/
+#mainBodyContainer {
+    min-height: 70vh;
+}
 
+/*loader styles*/
 @-webkit-keyframes animateShadeOn {
     from {
         opacity: 0

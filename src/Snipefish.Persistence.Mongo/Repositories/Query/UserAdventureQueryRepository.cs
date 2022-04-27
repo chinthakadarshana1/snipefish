@@ -11,9 +11,9 @@ namespace Snipefish.Persistence.Mongo.Repositories.Query
         {
         }
 
-        public async Task<UserAdventures?> GetUserByUserName(string requestUserEmail, CancellationToken cancellationToken)
+        public async Task<UserAdventures?> GetUserByUserName(string requestUserName, CancellationToken cancellationToken)
         {
-            return await MongoCollection.Find(c => c.UserName.ToLower() == requestUserEmail.ToLower() )
+            return await MongoCollection.Find(c => c.UserName.ToLower() == requestUserName.ToLower() )
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
