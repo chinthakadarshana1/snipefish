@@ -7,23 +7,10 @@ $(document).ready(function () {
 function loadTree() {
     var treeData =
     {
-        "name": "Top Level",
-        "children": [
-            {
-                "name": "Level 2: A",
-                "children": [
-                    { "name": "Son of A" },
-                    {
-                        "name": "Daughter of A"
-                        , "children": [
-                            { "name": "Son of A" },
-                            { "name": "Son of A" },
-                            { "name": "Daughter of A" }
-                        ]
-                    }
-                ]
-            },
-            { "name": "Level 2: B" }
+        "StepId": uuidv4(),
+        "Name": "Start",
+        "IsSelected": true,
+        "SubSteps": [
         ]
     };
 
@@ -80,7 +67,14 @@ function addClicked(d, callBack) {
 function addNewStep(d, callBack) {
     let newStepName = $("#txtStepName").val();
     if (newStepName) {
-        let newStep = { name: newStepName };
+        let newStep = {
+            "StepId": uuidv4(),
+            "Name": newStepName,
+            "IsSelected": false,
+            "SubSteps": [
+            ]
+        };
+
         $('#modalAddNode').modal('hide');
         callBack(d, newStep);
     }
@@ -92,7 +86,7 @@ function removeClicked(d, callBack) {
 }
 
 function editClicked(d, callBack) {
-    $("#txtStepName").val(d.data.name);
+    $("#txtStepName").val(d.data.Name);
     $("#modalAddNodeLabel").html("Edit Step");
     $('#modalAddNode').modal('show');
     $('#btnAddStep').off("click");
@@ -104,7 +98,7 @@ function editClicked(d, callBack) {
 function editStep(d, callBack) {
     let modifiedName = $("#txtStepName").val();
     if (modifiedName) {
-        d.data.name = modifiedName;
+        d.data.Name = modifiedName;
         $('#modalAddNode').modal('hide');
         callBack(d);
     }

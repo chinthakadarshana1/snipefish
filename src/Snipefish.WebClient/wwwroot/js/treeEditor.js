@@ -1,5 +1,9 @@
 ﻿
-
+function uuidv4() {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+}
 
 function treeEditor(configurations) {
     "use strict";
@@ -169,7 +173,7 @@ function treeEditor(configurations) {
                     //return d.children || d._children ? "end" : "start";
                     return "start";
                 })
-                .text(function (d) { return d.data.name; })
+                .text(function (d) { return d.data.Name; })
                 .attr('cursor', 'pointer')
                 .on('click', function (d) { configurations.nodeClick(d, nodeClickInternal); });
 
@@ -272,10 +276,10 @@ function treeEditor(configurations) {
 
         // Add new Node
         function addClickInternal(d, newChild) {
-            if (!d.data.children) {
-                d.data.children = [];
+            if (!d.data.SubSteps) {
+                d.data.SubSteps = [];
             }
-            d.data.children.push(newChild);
+            d.data.SubSteps.push(newChild);
 
             var newNode = d3.hierarchy(newChild);
             newNode.depth = d.depth + 1;
@@ -300,9 +304,9 @@ function treeEditor(configurations) {
 
         // Remove node
         function removeClickInternal(d) {
-            let index = d.parent.data.children.length;
+            let index = d.parent.data.SubSteps.length;
             while (index--) {
-                if (d.parent.data.children[index].name === d.data.name) {
+                if (d.parent.data.SubSteps[index].StepId === d.data.StepId) {
                     if (d.parent._children) {
                         d.parent._children.splice(index, 1);
                     }
@@ -311,12 +315,12 @@ function treeEditor(configurations) {
                         d.parent.children.splice(index, 1);
                     }
 
-                    d.parent.data.children.splice(index, 1);
+                    d.parent.data.SubSteps.splice(index, 1);
                     break;
                 }
             }
 
-            if (d.parent.data.children.length == 0) {
+            if (d.parent.data.SubSteps.length == 0) {
                 nodeClickInternal(d.parent);
             } else {
                 update(d.parent);
@@ -357,12 +361,13 @@ function treeEditor(configurations) {
 
 
         PublicProps.LoadTree = function (data) {
-            root = d3.hierarchy(data, function (d) { return d.children; });
+            root = d3.hierarchy(data, function (d) { return d.SubSteps; });
             root.x0 = svgHeight / 2;
             root.y0 = 0;
 
             // Collapse after the second level //todo
-            root.children.forEach(collapse);
+            if (root.children)
+                root.children.forEach(collapse);
             update(root);
         }
 
