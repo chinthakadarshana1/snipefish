@@ -6,25 +6,25 @@ $(document).ready(function () {
 
 
 function bindUi() {
-    $("#btnAddAdventure").click(saveAdventure);
+    $("#btnFinishAdventure").click(finishAdventure);
 }
 
 
-function saveAdventure() {
-    let advName = $("#txtAdventureName").val();
+function finishAdventure() {
+    window.SelectedAdventure.IsFinished = true;
+    window.Snipfish.CommonFunctions.cHiNLoader(true);
 
-    if (advName) {
-        newAdventure.Name = advName;
-        window.Snipfish.CommonFunctions.cHiNLoader(true);
+    window.Snipfish.CommonFunctions.AjaxPut(Snipfish.Configurations.snipefishApiUrl + "UserAdventures", window.SelectedAdventure)
+        .then(function (data) {
+            window.Snipfish.CommonFunctions.cHiNLoader(false);
+            $.growl.notice({ title: "Adventure saved successfully", message: window.SelectedAdventure.Name + "Adventure successfully saved." });
+            setTimeout(function () { redirectToViewPage(); }, 1000);
+        }.bind(this));
+}
 
-        window.Snipfish.CommonFunctions.AjaxPost(Snipfish.Configurations.snipefishApiUrl + "UserAdventures", newAdventure)
-            .then(function (data) {
-                window.Snipfish.CommonFunctions.cHiNLoader(false);
-                $.growl.notice({ title: "Adventure saved successfully", message: newAdventure.Name + "Adventure successfully added." });
-                setTimeout(function () { location.reload(); }, 1000);
-            }.bind(this));
-
-    }
+function redirectToViewPage() {
+    let viewUrl = window.location.href.replace("StartAdventure", "ViewAdventure");
+    window.location.href = viewUrl;
 }
 
 function loadTree() {
@@ -46,8 +46,8 @@ function loadTree() {
     $("#btnCenter").click(function () { tree.center() });
 
     $("#svgWrapper").on("tree_editor:data_updated", function (d) {
-        //console.log(d.treeData);
-        SelectedAdventure = d.treeData;
+        SelectedAdventure.StartStep = d.treeData;
+        console.log(SelectedAdventure);
     });
 }
 

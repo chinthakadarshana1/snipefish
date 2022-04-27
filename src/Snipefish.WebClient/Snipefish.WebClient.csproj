@@ -32,6 +32,7 @@
     <_ContentIncludedByDefault Remove="Views\Adventure\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Adventure\MyAdventures.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Adventure\StartAdventure.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Adventure\ViewAdventure.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +45,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Adventure\StartAdventure.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Adventure\ViewAdventure.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -36,8 +36,8 @@ namespace Snipefish.WebApi.Controllers
         }
 
         // PUT api/<UserAdventuresController>/5
-        [HttpPut("{id}")]
-        public async Task Put(string id, [FromBody] UpdateUserAdventuresCommand value)
+        [HttpPut]
+        public async Task Put([FromBody] UpdateUserAdventuresCommand value)
         {
             await _mediator.Send(value);
         }

@@ -1,27 +1,44 @@
 ﻿using MediatR;
 using Snipefish.Application.Commands.UserAdventures;
 using Snipefish.Application.Mapping;
+using Snipefish.Application.Responses;
+using Snipefish.Domain.Entities;
 using Snipefish.Domain.Repositories.Command;
+using Snipefish.Domain.Repositories.Query;
 
 namespace Snipefish.Application.CommandHandlers.UserAdventures
 {
-    public class UpdateUserAdventuresCommandHandler : IRequestHandler<UpdateUserAdventuresCommand>
+    public class UpdateUserAdventuresCommandHandler : IRequestHandler<UpdateUserAdventuresCommand, UserAdventuresResponse>
     {
         private readonly IUserAdventureCommandRepository _userAdventuresCommandRepository;
+        private readonly IUserAdventureQueryRepository _userAdventureQueryRepository;
 
-        public UpdateUserAdventuresCommandHandler(IUserAdventureCommandRepository userAdventuresCommandRepository)
+        public UpdateUserAdventuresCommandHandler(IUserAdventureCommandRepository userAdventuresCommandRepository, IUserAdventureQueryRepository userAdventureQueryRepository)
         {
             _userAdventuresCommandRepository = userAdventuresCommandRepository;
+            _userAdventureQueryRepository = userAdventureQueryRepository;
         }
 
 
-        public async Task<Unit> Handle(UpdateUserAdventuresCommand request, CancellationToken cancellationToken)
+        public async Task<UserAdventuresResponse> Handle(UpdateUserAdventuresCommand request, CancellationToken cancellationToken)
         {
-            var userAdventuresEntity = MappingBootstraper.Mapper.Map<Domain.Entities.UserAdventures>(request);
+            Domain.Entities.UserAdventures? existingUserAdventures = await _userAdventureQueryRepository.GetUserByUserId(request.UserId, cancellationToken);
 
-            await _userAdventuresCommandRepository.UpdateAsync(userAdventuresEntity, cancellationToken);
+            if (existingUserAdventures?.Adventures != null)
+            {
+                var existingAdventure =
+                    existingUserAdventures.Adventures.FirstOrDefault(x => x.Name.ToLower() == request.Name.ToLower());
 
-            return Unit.Value;
+                if (existingAdventure != null)
+                {
+                    existingAdventure.IsFinished = request.IsFinished;
+                    existingAdventure.StartStep = request.StartStep;
+
+                    await _userAdventuresCommandRepository.UpdateAsync(existingUserAdventures, cancellationToken);
+                }
+            }
+
+            return MappingBootstraper.Mapper.Map<UserAdventuresResponse>(existingUserAdventures);
         }
     }
 }

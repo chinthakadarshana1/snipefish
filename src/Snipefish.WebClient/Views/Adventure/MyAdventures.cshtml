@@ -25,7 +25,7 @@
                     {
                         foreach (var modelAdventure in Model.Adventures)
                         {
-                            var statusClass = modelAdventure.IsFinished ? ("bg-success","Finished","View",Url.Action("StartAdventure"))  
+                            var statusClass = modelAdventure.IsFinished ? ("bg-success","Finished","View",Url.Action("ViewAdventure","Adventure",modelAdventure))  
                                 :  ("bg-primary","Not Started","Start",Url.Action("StartAdventure","Adventure",modelAdventure));
 
                             <tr>

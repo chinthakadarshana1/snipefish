@@ -90,6 +90,25 @@ Snipfish = (function ($) {
         });
     };
 
+    CommonFunctions.prototype.AjaxPut = function (url, postData) {
+        return new Promise(function (resolve, reject) {
+            $.ajax({
+                url: url,
+                type: "PUT",
+                data: JSON.stringify(postData),
+                contentType: "application/json; charset=utf-8",
+                //dataType: "json",
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    $.growl.error({ title: "Error occurred", message: errorThrown });
+                    reject(jqXhr);
+                }
+            });
+        });
+    };
+
     return {
         CommonFunctions: new CommonFunctions()
     }

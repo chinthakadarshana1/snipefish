@@ -153,9 +153,15 @@ function treeViewer(configurations) {
                     return d._children ? 'url(#f1)' : '';
                 })
                 .style("fill", function (d) {
-                    return d._children ? "#c5d4f5" : "#def4ff";
+                    if (d.data.IsSelected)
+                        return "#6cff6c";
+                    else
+                        return d._children ? "#c5d4f5" : "#def4ff";
                 })
                 .on('click', function (d) { configurations.nodeClick(d, nodeClickInternal); });
+
+            //add new button
+            loadActionBtn(nodeEnter, 0, -45, selectClickInternal, "select");
 
             // Add labels for the nodes
             nodeEnter.append('text')
@@ -180,6 +186,17 @@ function treeViewer(configurations) {
                 .attr("transform", function (d) {
                     return "translate(" + d.y + "," + d.x + ")";
                 });
+
+            nodeUpdate.select('rect')
+                .attr('filter', function (d) {
+                    return d._children ? 'url(#f1)' : '';
+                })
+                .style("fill", function (d) {
+                    if (d.data.IsSelected)
+                        return "#6cff6c";
+                    else
+                        return d._children ? "#c5d4f5" : "#def4ff";
+                })
 
 
             // Remove any exiting nodes
@@ -207,14 +224,16 @@ function treeViewer(configurations) {
 
             // Enter any new links at the parent's previous position.
             var linkEnter = link.enter().insert('path', "g")
-                .attr("class", function (d) { return d._children ? "link active" : "link"; })
+                .attr("class", function (d) { return d.data.IsSelected ? "link active" : "link"; })
                 .attr('d', function (d) {
                     var o = { x: source.x0, y: source.y0 };
                     return diagonal(o, o);
                 });
 
             // UPDATE
-            var linkUpdate = linkEnter.merge(link);
+            var linkUpdate = linkEnter
+                .merge(link)
+                .attr("class", function (d) { return d.data.IsSelected ? "link active" : "link"; });
 
             // Transition back to the parent element position
             linkUpdate.transition()
@@ -253,6 +272,49 @@ function treeViewer(configurations) {
             event.treeData = data;
             $(parentDivId).trigger(event);
         }
+
+        function loadActionBtn(node, x, y, onClick, text) {
+            node.append('rect')
+                .attr('class', 'node-action')
+                .attr('width', 50)
+                .attr('height', 20)
+                .attr('y', y)
+                .attr('x', x)
+                .attr('cursor', 'pointer')
+                .on('click', onClick);
+
+            node.append('text')
+                .attr("dy", ".35em")
+                .attr("x", function (d) {
+                    return x + 45;
+                })
+                .attr("y", function (d) {
+                    return y + 10;
+                })
+                .attr("class", "node-action-text")
+                .attr("text-anchor", function (d) {
+                    return "end";
+                })
+                .text(function (d) { return text; })
+                .attr('cursor', 'pointer')
+                .on('click', onClick);
+        }
+
+        // Toggle children on nodeClick.
+        function selectClickInternal(d) {
+            //console.log(d);
+            if (d.parent.data.IsSelected) {
+                d.data.IsSelected = true;
+                update(d);
+                d.parent.children.forEach(function (element, index) {
+                    if (element.data.StepId != d.data.StepId) {
+                        element.data.IsSelected = false;
+                        update(element);
+                    }
+                });
+            }
+        }
+
 
 
         // Toggle children on nodeClick.

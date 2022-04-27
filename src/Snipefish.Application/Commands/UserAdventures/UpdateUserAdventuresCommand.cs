@@ -4,10 +4,11 @@ using Snipefish.Domain.Entities;
 
 namespace Snipefish.Application.Commands.UserAdventures
 {
-    public class UpdateUserAdventuresCommand : IRequest<UserAdventuresResponse>, IRequest<Unit>
+    public class UpdateUserAdventuresCommand : IRequest<UserAdventuresResponse>
     {
         public string UserId { get; set; } = null!;
-        public string UserName { get; set; } = null!;
-        public List<Adventure> Adventures => new List<Adventure>();
+        public string Name { get; set; } = null!;
+        public bool IsFinished { get; set; }
+        public Step? StartStep { get; set; }
     }
 }

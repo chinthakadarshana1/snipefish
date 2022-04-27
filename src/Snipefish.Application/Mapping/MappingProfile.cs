@@ -16,7 +16,7 @@ namespace Snipefish.Application.Mapping
 
             CreateMap<UserAdventures, UserAdventuresResponse>().ReverseMap();
             CreateMap<Adventure, AddUserAdventuresCommand>().ReverseMap();
-            CreateMap<UserAdventures, UpdateUserAdventuresCommand>().ReverseMap();
+            CreateMap<Adventure, UpdateUserAdventuresCommand>().ReverseMap();
         }
     }
 }

@@ -3,7 +3,7 @@
 @model Snipefish.Domain.Entities.Adventure
 
 @{
-    ViewData["Title"] = "Start Adventure";
+    ViewData["Title"] = "View Adventure";
 }
 
 @section Head{
@@ -14,12 +14,8 @@
     <div class="row">
         <div class="row page-header">
             <div class="col" style="margin-bottom: 20px;">
-                <h1 class="display-6">Start Adventure <b>@Model!.Name</b></h1>
+                <h1 class="display-6">View Adventure <b>@Model!.Name</b></h1>
             </div>
-            <div class="col" style="margin: auto;">
-                <button id="btnFinishAdventure" type="button" class="btn btn-primary">Finish</button>
-            </div>
-        
         </div>
     </div>
     <div class="row">

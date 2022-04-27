@@ -72,5 +72,32 @@ namespace Snipefish.WebClient.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        public async Task<IActionResult> ViewAdventure(Adventure adventure)
+        {
+            var loggedInUser = HttpContext.Session.Get<UserAdventuresResponse>(SnipefishWebConfiguration.UserSessionKey);
+
+            if (loggedInUser != null)
+            {
+                var userAdventures = await _snipefishWebApi.GetAdventuresByUserId(loggedInUser.UserId, default);
+
+                if (userAdventures?.Adventures != null)
+                {
+                    var selectedAdventure =
+                        userAdventures.Adventures.FirstOrDefault(x => x.Name.ToLower() == adventure.Name.ToLower());
+
+                    if (selectedAdventure != null)
+                    {
+                        return View(selectedAdventure);
+                    }
+                    return RedirectToAction("MyAdventures", "Adventure");
+                }
+                return RedirectToAction("MyAdventures", "Adventure");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }
