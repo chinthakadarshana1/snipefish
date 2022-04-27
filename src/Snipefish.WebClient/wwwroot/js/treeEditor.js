@@ -192,7 +192,7 @@ function treeEditor(configurations) {
                 })
                 .remove();
 
-            // On exit reduce the node circles size to 0
+            // On exit reduce the node size to 0
             nodeExit.select('rect')
                 .attr('width', 0)
                 .attr('heigth', 0);
@@ -246,6 +246,14 @@ function treeEditor(configurations) {
                         ${d.y} ${d.x}`;
                 return path;
             }
+
+            triggerDataUpdateEvent(root.data);
+        }
+
+        function triggerDataUpdateEvent(data) {
+            var event = jQuery.Event("tree_editor:data_updated");
+            event.treeData = data;
+            $(parentDivId).trigger(event);
         }
 
 
@@ -263,9 +271,7 @@ function treeEditor(configurations) {
         }
 
         // Add new Node
-        function addClickInternal(d) {
-            let newChild = { "name": "chin" };
-
+        function addClickInternal(d, newChild) {
             if (!d.data.children) {
                 d.data.children = [];
             }
@@ -319,7 +325,7 @@ function treeEditor(configurations) {
 
         //edit node
         function editClickInternal(d) {
-            //todo
+            nodeClickInternal(d.parent);
         }
 
 

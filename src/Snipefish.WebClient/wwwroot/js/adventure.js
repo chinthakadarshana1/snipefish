@@ -45,6 +45,10 @@ function loadTree() {
     $("#btnPanLeft").click(function () { tree.panLeft() });
     $("#btnPanRight").click(function () { tree.panRight() });
     $("#btnCenter").click(function () { tree.center() });
+
+    $("#svgWrapper").on("tree_editor:data_updated", function (d) {
+        console.log(d.treeData);
+    });
 }
 
 
@@ -54,11 +58,13 @@ function nodeClicked(d, callBack) {
 }
 
 function addClicked(d, callBack) {
-    console.log(d);
-
+    $("#txtStepName").val("");
+    $("#modalAddNodeLabel").html("Add Step");
     $('#modalAddNode').modal('show');
     $('#btnAddStep').off("click");
-    $('#btnAddStep').click(function () { callBack(d) });
+    $('#btnAddStep').click(function () {
+        addNewStep(d, callBack)
+    });
 
     //window.Snipfish.cHiNLoader(true);
     /*
@@ -70,12 +76,36 @@ function addClicked(d, callBack) {
     //callBack(d);
 }
 
+
+function addNewStep(d, callBack) {
+    let newStepName = $("#txtStepName").val();
+    if (newStepName) {
+        let newStep = { name: newStepName };
+        $('#modalAddNode').modal('hide');
+        callBack(d, newStep);
+    }
+}
+
+
 function removeClicked(d, callBack) {
-    console.log(d);
     callBack(d);
 }
 
 function editClicked(d, callBack) {
-    console.log(d);
-    callBack(d);
+    $("#txtStepName").val(d.data.name);
+    $("#modalAddNodeLabel").html("Edit Step");
+    $('#modalAddNode').modal('show');
+    $('#btnAddStep').off("click");
+    $('#btnAddStep').click(function () {
+        editStep(d, callBack)
+    });
+}
+
+function editStep(d, callBack) {
+    let modifiedName = $("#txtStepName").val();
+    if (modifiedName) {
+        d.data.name = modifiedName;
+        $('#modalAddNode').modal('hide');
+        callBack(d);
+    }
 }

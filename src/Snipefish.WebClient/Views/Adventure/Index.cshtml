@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="~/css/createAdventure.css" asp-append-version="true" />
 }
 
-
 <div class="container-fluid">
-        <div class="row">
+    <div class="row">
         <div class="row page-header">
             <div class="col" style="margin-bottom: 20px;">
                 <h1 class="display-6">Create New Adventure</h1>
@@ -38,7 +37,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="modalAddNode" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
-    aria-labelledby="modalAddNodeLabel" aria-hidden="true">
+        aria-labelledby="modalAddNodeLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -48,12 +47,12 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="txtStepName" class="form-label">Step Name</label>
-                    <input type="text" class="form-control" id="txtStepName" placeholder="Step Name">
+                    <input type="text" class="form-control" id="txtStepName" placeholder="Step Name" required>
                   </div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" id="btnAddStep" class="btn btn-primary">Add</button>
+            <button type="button" id="btnAddStep" class="btn btn-primary">Save</button>
             </div>
         </div>
         </div>
