@@ -4,6 +4,7 @@ namespace Snipefish.Domain.Repositories.Query
 {
     public interface IUserAdventureQueryRepository : IQueryRepository<UserAdventures>
     {
-        Task<UserAdventures?> GetUserByEmail(string requestUserEmail, CancellationToken cancellationToken);
+        Task<UserAdventures?> GetUserByUserName(string requestUserEmail, CancellationToken cancellationToken);
+        Task<UserAdventures?> GetUserByUserId(string userId, CancellationToken cancellationToken);
     }
 }

@@ -1,7 +1,36 @@
 ﻿
+var newAdventure = {
+    "UserId": Snipfish.UserId,
+    "StartStep": {},
+    "Name": ""
+};
+
 $(document).ready(function () {
+    
     loadTree();
+    bindUi();
 });
+
+
+function bindUi() {
+    $("#btnAddAdventure").click(saveAdventure);
+}
+
+
+function saveAdventure() {
+    let advName = $("#txtAdventureName").val();
+
+    if (advName) {
+        newAdventure.Name = advName;
+        window.Snipfish.CommonFunctions.cHiNLoader(true);
+
+        window.Snipfish.CommonFunctions.AjaxPost(Snipfish.Configurations.snipefishApiUrl + "UserAdventures", newAdventure)
+            .then(function (data) {
+                window.Snipfish.CommonFunctions.cHiNLoader(false);
+            }.bind(this));
+
+    }
+}
 
 
 function loadTree() {
@@ -34,7 +63,8 @@ function loadTree() {
     $("#btnCenter").click(function () { tree.center() });
 
     $("#svgWrapper").on("tree_editor:data_updated", function (d) {
-        console.log(d.treeData);
+        //console.log(d.treeData);
+        newAdventure.StartStep = d.treeData;
     });
 }
 
@@ -52,15 +82,6 @@ function addClicked(d, callBack) {
     $('#btnAddStep').click(function () {
         addNewStep(d, callBack)
     });
-
-    //window.Snipfish.cHiNLoader(true);
-    /*
-    window.Snipfish.CommonFunctions.AjaxPost(Snipfish.Configurations.snipefishApiUrl + "todo", { "Name": "chin", "Description": "chin 12345" })
-        .then(function (data) {
-            //window.CommonFunctions.cHiNLoader(false);
-        }.bind(this));
-    */
-    //callBack(d);
 }
 
 

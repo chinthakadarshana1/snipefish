@@ -78,15 +78,10 @@ Snipfish = (function ($) {
                 type: "POST",
                 data: JSON.stringify(postData),
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",
+                //dataType: "json",
                 success: function (data) {
-                    if (data) {
                         resolve(data);
-                    } else {
-                        $.growl.error({ title: "Error occurred", message: "Api Call Error" });
-                        reject("Api Call Error");
-                    }
-                },
+                    },
                 error: function (jqXhr, textStatus, errorThrown) {
                     $.growl.error({ title: "Error occurred", message: errorThrown });
                     reject(jqXhr);

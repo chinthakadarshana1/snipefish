@@ -4,6 +4,6 @@
     {
         public string UserId { get; set; } = null!;
         public string UserName { get; set; } = null!;
-        public List<Adventure> Adventures => new List<Adventure>();
+        public List<Adventure>? Adventures { get; set; }
     }
 }

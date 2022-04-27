@@ -20,7 +20,7 @@ namespace Snipefish.Application.CommandHandlers.UserAdventures
 
         public async Task<UserAdventuresResponse> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            Domain.Entities.UserAdventures? existingUser = await _userAdventureQueryRepository.GetUserByEmail(request.UserName, cancellationToken);
+            Domain.Entities.UserAdventures? existingUser = await _userAdventureQueryRepository.GetUserByUserName(request.UserName, cancellationToken);
 
             if (existingUser == null)
             {
