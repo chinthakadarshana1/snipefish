@@ -27,11 +27,12 @@ function saveAdventure() {
         window.Snipfish.CommonFunctions.AjaxPost(Snipfish.Configurations.snipefishApiUrl + "UserAdventures", newAdventure)
             .then(function (data) {
                 window.Snipfish.CommonFunctions.cHiNLoader(false);
+                $.growl.notice({ title: "Adventure saved successfully", message: newAdventure.Name + "Adventure successfully added." });
+                setTimeout(function () { location.reload(); }, 1000);
             }.bind(this));
 
     }
 }
-
 
 function loadTree() {
     var treeData =
@@ -52,7 +53,7 @@ function loadTree() {
     }
 
 
-    let tree = treeEditor(treeConfig);
+    let tree = new treeEditor(treeConfig);
     tree.LoadTree(treeData);
 
     $("#btnZoomIn").click(function () { tree.zoomIn() });

@@ -142,13 +142,18 @@ function treeEditor(configurations) {
 
             // Add Rect for the nodes
             nodeEnter.append('rect')
-                .attr('class', 'node')
+                .attr('class', function (d) {
+                    return d._children ? "node parent-node" : "node";
+                })
                 .attr('width', 100)
                 .attr('height', 60)
                 .attr('y', -30)
                 .attr('cursor', 'pointer')
+                .attr('filter', function (d) {
+                    return d._children ? 'url(#f1)' : '';
+                })
                 .style("fill", function (d) {
-                    return d._children ? "lightsteelblue" : "#d6e2ec";
+                    return d._children ? "#c5d4f5" : "#def4ff";
                 })
                 .on('click', function (d) { configurations.nodeClick(d, nodeClickInternal); });
 
@@ -346,11 +351,12 @@ function treeEditor(configurations) {
             node.append('text')
                 .attr("dy", ".35em")
                 .attr("x", function (d) {
-                    return x + 12;
+                    return x + 14;
                 })
                 .attr("y", function (d) {
                     return y + 10;
                 })
+                .attr("class", "node-action-text")
                 .attr("text-anchor", function (d) {
                     return "end";
                 })

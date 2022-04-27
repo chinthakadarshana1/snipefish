@@ -22,20 +22,37 @@
     padding-top: 5px;
 }
 
+.node.parent-node {
+    fill: #fff;
+    stroke: #868e94;
+    stroke-width: 2px;
+}
+
 .node rect {
     fill: #fff;
-    stroke: steelblue;
+    stroke: #868e94;
     stroke-width: 3px;
 }
 
-.node-action {
-    fill: rgba(255, 255, 255, 0);
-    stroke: rgb(83, 180, 70);
-    stroke-width: 1px;
+.node .node-action {
+    fill: rgb(255 255 255);
+    stroke: rgb(74 70 70);
+    stroke-width: 2px;
+}
+
+.node .node-action:hover {
+    fill: rgb(195, 236, 246);
+}
+
+.node .node-action-text {
+    font-weight: bolder;
+    fill: rgb(0 0 0);
+    font-size: 14px;
 }
 
 .node text {
     font: 12px sans-serif;
+    fill: #1b1a1a;
 }
 
 .link {
