@@ -170,6 +170,7 @@ function treeEditor(configurations) {
 
             // Add labels for the nodes
             nodeEnter.append('text')
+                .attr("class", "node-text")
                 .attr("dy", ".35em")
                 .attr("x", function (d) {
                     return 10;
@@ -191,6 +192,20 @@ function treeEditor(configurations) {
                 .attr("transform", function (d) {
                     return "translate(" + d.y + "," + d.x + ")";
                 });
+
+            nodeUpdate.select('rect')
+                .attr('filter',
+                    function(d) {
+                        return d._children ? 'url(#f1)' : '';
+                    })
+                .style("fill",
+                    function(d) {
+                        return d._children ? "#c5d4f5" : "#def4ff";
+                    });
+
+            // update labels for the nodes
+            nodeUpdate.select('.node-text')
+                .text(function(d) { return d.data.Name; });
 
 
             // Remove any exiting nodes
@@ -334,7 +349,7 @@ function treeEditor(configurations) {
 
         //edit node
         function editClickInternal(d) {
-            nodeClickInternal(d.parent);
+            update(d);
         }
 
 
