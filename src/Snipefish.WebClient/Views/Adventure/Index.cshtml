@@ -1,0 +1,81 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "Create Adventure";
+}
+
+@section Head{
+    <link rel="stylesheet" href="~/css/createAdventure.css" asp-append-version="true" />
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="row page-header">
+            <div class="col" style="margin-bottom: 20px;">
+                <h1 class="display-6">Create New Adventure</h1>
+            </div>
+        
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="txtAdventureName" placeholder="Adventure Name" aria-label="Adventure Name" aria-describedby="btnAddAdventure">
+            <button class="btn btn-outline-secondary" type="button" id="btnAddAdventure">Save Adventure</button>
+          </div>
+    </div>
+    <div class="row">
+        <div class="editor-container">
+            <div class="svg-wrapper" id="svgWrapper">
+                <svg class="svg-editor" width="1250" height="560">
+                    <defs>
+                        <filter id="f1" x="0" y="0" width="200%" height="200%">
+                            <feOffset result="offOut" in="SourceGraphic" dx="3" dy="3" />
+                            <feBlend in="SourceGraphic" in2="offOut" mode="normal" />
+                        </filter>
+                    </defs>
+                    <g></g>
+                </svg>
+            </div>
+            <div class="svg-controls">
+                <button id="btnZoomIn" class="btn btn-outline-secondary bi bi-align-center">Zoom in</button>
+                <button id="btnZoomOut" class="btn btn-outline-secondary">Zoom out</button>
+                <button id="btnResetZoom" class="btn btn-outline-secondary">Reset zoom</button>
+                <button id="btnPanLeft" class="btn btn-outline-secondary">Pan left</button>
+                <button id="btnPanRight" class="btn btn-outline-secondary">Pan right</button>
+                <button id="btnCenter" class="btn btn-outline-secondary">Center</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalAddNode" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+        aria-labelledby="modalAddNodeLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="modalAddNodeLabel">Add Step</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="txtStepName" class="form-label">Step Name</label>
+                    <input type="text" class="form-control" id="txtStepName" placeholder="Step Name" required>
+                  </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="btnAddStep" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <!-- load the d3.js library -->	
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script  src="~/js/treeEditor.js" asp-append-version="true"></script>
+    <script  src="~/js/adventure.js" asp-append-version="true"></script>
+}

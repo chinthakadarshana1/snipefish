@@ -1,0 +1,64 @@
+﻿@using System.Text.Json
+@using Newtonsoft.Json
+@model Snipefish.Domain.Entities.Adventure
+
+@{
+    ViewData["Title"] = "View Adventure";
+}
+
+@section Head{
+    <link rel="stylesheet" href="~/css/createAdventure.css" asp-append-version="true" />
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="row page-header">
+            <div class="col" style="margin-bottom: 20px;">
+                <h1 class="display-6">View Adventure <b>@Model!.Name</b></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="editor-container">
+            <div class="svg-wrapper" id="svgWrapper">
+                <svg class="svg-editor" width="1250" height="560">
+                    <defs>
+                        <filter id="f1" x="0" y="0" width="200%" height="200%">
+                            <feOffset result="offOut" in="SourceGraphic" dx="3" dy="3" />
+                            <feBlend in="SourceGraphic" in2="offOut" mode="normal" />
+                        </filter>
+                    </defs>
+                    <g></g>
+                </svg>
+            </div>
+            <div class="svg-controls">
+                <button id="btnZoomIn" class="btn btn-outline-secondary bi bi-align-center">Zoom in</button>
+                <button id="btnZoomOut" class="btn btn-outline-secondary">Zoom out</button>
+                <button id="btnResetZoom" class="btn btn-outline-secondary">Reset zoom</button>
+                <button id="btnPanLeft" class="btn btn-outline-secondary">Pan left</button>
+                <button id="btnPanRight" class="btn btn-outline-secondary">Pan right</button>
+                <button id="btnCenter" class="btn btn-outline-secondary">Center</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    
+    <script>
+        @{
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = null,
+            };
+        }
+        SelectedAdventure = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model))');
+    </script>
+
+    <!-- load the d3.js library -->	
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script  src="~/js/treeViewer.js" asp-append-version="true"></script>
+    <script  src="~/js/startAdventure.js" asp-append-version="true"></script>
+}

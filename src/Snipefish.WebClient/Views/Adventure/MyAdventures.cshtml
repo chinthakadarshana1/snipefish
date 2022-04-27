@@ -1,0 +1,49 @@
+﻿@using Snipefish.Domain.Entities
+@model Snipefish.Domain.Entities.UserAdventures
+
+@{
+    ViewData["Title"] = "My Adventures";
+}
+
+@section Head{
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Adventure</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @{
+                    if (Model?.Adventures != null)
+                    {
+                        foreach (var modelAdventure in Model.Adventures)
+                        {
+                            var statusClass = modelAdventure.IsFinished ? ("bg-success","Finished","View",Url.Action("ViewAdventure","Adventure",modelAdventure))  
+                                :  ("bg-primary","Not Started","Start",Url.Action("StartAdventure","Adventure",modelAdventure));
+
+                            <tr>
+                                <td>@modelAdventure.Name</td>
+                                <td><span class="badge @statusClass.Item1">@statusClass.Item2</span></td>
+                                <td>
+                                    <a href="@statusClass.Item4" class="btn btn-primary">@statusClass.Item3</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+}

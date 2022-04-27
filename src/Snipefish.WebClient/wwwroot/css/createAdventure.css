@@ -1,0 +1,72 @@
+.page-header {
+    margin-bottom: 20px;
+}
+
+.editor-container {
+}
+
+.svg-wrapper {
+    border: 1px solid #c9c9c9;
+    box-shadow: 0px 0px 2px 2px #d1cccd;
+    overflow: hidden
+}
+
+.svg-editor {
+    display: block;
+    margin: auto;
+}
+
+.svg-controls {
+    border: 1px solid #ffffff00;
+    box-shadow: 0px 0px 0px 2px #b4a4a6;
+    padding-top: 5px;
+}
+
+.node.parent-node {
+    fill: #fff;
+    stroke: #868e94;
+    stroke-width: 2px;
+}
+
+.node rect {
+    fill: #fff;
+    stroke: #868e94;
+    stroke-width: 3px;
+}
+
+.node .node-action {
+    fill: rgb(255 255 255);
+    stroke: rgb(74 70 70);
+    stroke-width: 2px;
+}
+
+.node .node-action:hover {
+    fill: rgb(195, 236, 246);
+}
+
+.node .node-action-text {
+    font-weight: bolder;
+    fill: rgb(0 0 0);
+    font-size: 14px;
+}
+
+.node text {
+    font: 12px sans-serif;
+    fill: #1b1a1a;
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+}
+
+.link.active {
+    fill: none;
+    stroke: rgb(121, 207, 220);
+    stroke-width: 4px;
+}
+
+node-text {
+
+}
